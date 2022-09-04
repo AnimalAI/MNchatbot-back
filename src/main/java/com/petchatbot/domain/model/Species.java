@@ -1,5 +1,5 @@
 package com.petchatbot.domain.model;
 
-public enum Breed {
+public enum Species {
     DOG, CAT
 }

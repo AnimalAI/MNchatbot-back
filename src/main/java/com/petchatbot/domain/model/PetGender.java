@@ -1,5 +1,5 @@
 package com.petchatbot.domain.model;
 
-public enum PetSex {
+public enum PetGender {
     MALE, FEMALE
 }

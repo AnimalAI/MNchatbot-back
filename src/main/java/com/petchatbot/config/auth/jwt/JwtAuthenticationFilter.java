@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             ObjectMapper om = new ObjectMapper();
             Member member = om.readValue(request.getInputStream(), Member.class);
-            log.info("memberEmail={}, memberPassword={}", member.getMemberEmail(), member.getMemberPassword());
+            log.info("로그인 시도 memberEmail={}, memberPassword={}", member.getMemberEmail(), member.getMemberPassword());
 
             // 토큰 생성 (인증용 객체)
             UsernamePasswordAuthenticationToken authenticationToken =

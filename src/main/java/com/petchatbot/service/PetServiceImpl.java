@@ -48,8 +48,8 @@ public class PetServiceImpl implements PetService{
             //log.info("pet 정보 ={}", pet.getPetName());
             String petName = pet.getPetName();
             Long petSerial = pet.getPetSerial();
-            Breed petBreed = pet.getPetBreed();
-            PetListDto petListDto = new PetListDto(petName, petSerial, petBreed);
+            Species petSpecies = pet.getPetSpecies();
+            PetListDto petListDto = new PetListDto(petName, petSerial, petSpecies);
             pets.add(petListDto);
         }
         return pets;
@@ -62,23 +62,31 @@ public class PetServiceImpl implements PetService{
         return petReq;
     }
 
+    @Override
+    public void petDelete(Long petSerial) {
+        Pet findPet = petRepository.findByPetSerial(petSerial);
+        petRepository.delete(findPet);
+    }
+
     private PetReq extracted(Pet pet) {
+        Species petSpecies = pet.getPetSpecies();
+        String petBreed = pet.getPetBreed();
         String petName = pet.getPetName();
         int petAge = pet.getPetAge();
-        Breed petBreed = pet.getPetBreed();
-        PetSex petSex = pet.getPetSex();
+        PetGender petGender = pet.getPetgender();
         Neutralization petNeutralization = pet.getPetNeutralization();
-        PetReq petReq = new PetReq(petBreed, petName, petAge, petSex, petNeutralization);
+        PetReq petReq = new PetReq(petSpecies, petBreed, petName, petAge, petGender, petNeutralization);
         return petReq;
     }
 
     private void setPet(ChangePetInfoReq petInfoReq, Pet findPet) {
-        Breed petBreed = petInfoReq.getPetBreed();
+        Species petSpecies = petInfoReq.getPetSpecies();
+        String petBreed = petInfoReq.getPetBreed();
         String petName = petInfoReq.getPetName();
         int petAge = petInfoReq.getPetAge();
-        PetSex petSex = petInfoReq.getPetSex();
+        PetGender petGender = petInfoReq.getPetGender();
         Neutralization petNeutralization = petInfoReq.getPetNeutralization();
-        findPet.changePetInfo(petBreed, petName, petAge, petSex, petNeutralization);
+        findPet.changePetInfo(petSpecies, petBreed, petName, petAge, petGender, petNeutralization);
     }
 
     private Pet getFindPet(ChangePetInfoReq petInfoReq) {
@@ -94,16 +102,15 @@ public class PetServiceImpl implements PetService{
     }
 
     private Pet createPetEntity(PetReq petRegReq) {
-        Breed petBreed = petRegReq.getPetBreed();
-        log.info("petBreed={}", petBreed);
+        Species petSpecies = petRegReq.getPetSpecies();
+        String petBreed = petRegReq.getPetBreed();
+        log.info("petSpecies={}", petSpecies);
         String petName = petRegReq.getPetName();
         int petAge = petRegReq.getPetAge();
-        PetSex petSex = petRegReq.getPetSex();
+        PetGender petGender = petRegReq.getPetGender();
         Neutralization petNeutralization = petRegReq.getPetNeutralization();
-
-        Pet pet = new Pet(petBreed, petName, petAge, petSex, petNeutralization);
+        Pet pet = new Pet(petSpecies, petBreed, petName, petAge, petGender, petNeutralization);
         return pet;
     }
-
 
 }

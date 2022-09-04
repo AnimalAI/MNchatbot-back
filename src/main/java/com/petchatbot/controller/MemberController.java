@@ -134,9 +134,8 @@ public class MemberController {
     }
 
     // 회원탈퇴
-    @DeleteMapping("/member/delete")
-    public ResponseEntity<String> withdrawal(Authentication authentication){
-        String memberEmail = extractEmail(authentication);
+    @DeleteMapping("/member/delete/{memberEmail}")
+    public ResponseEntity<String> withdrawal(@PathVariable("memberEmail") String memberEmail){
         log.info("delete email={}", memberEmail);
         EmailDto emailDto = new EmailDto(memberEmail);
         memberService.withdrawal(emailDto);

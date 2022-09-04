@@ -18,30 +18,34 @@ public class Pet {
     @JoinColumn(name="member_serial")
     private Member member;
     @Enumerated(EnumType.STRING)
-    private Breed petBreed;
+    private Species petSpecies;
+
+    private String petBreed;
     private String petName;
     private int petAge;
     @Enumerated(EnumType.STRING)
-    private PetSex petSex;
+    private PetGender petgender;
     @Enumerated(EnumType.STRING)
     private Neutralization petNeutralization;
 
     public Pet() {
     }
 
-    public Pet(Breed petBreed, String petName, int petAge, PetSex petSex, Neutralization petNeutralization) {
+    public Pet(Species petSpecies, String petBreed, String petName, int petAge, PetGender petGender, Neutralization petNeutralization) {
+        this.petSpecies = petSpecies;
         this.petBreed = petBreed;
         this.petName = petName;
         this.petAge = petAge;
-        this.petSex = petSex;
+        this.petgender = petGender;
         this.petNeutralization = petNeutralization;
     }
 
-    public void changePetInfo(Breed petBreed, String petName, int petAge, PetSex petSex,  Neutralization petNeutralization){
+    public void changePetInfo(Species petSpecies, String petBreed, String petName, int petAge, PetGender petgender, Neutralization petNeutralization){
+        this.petSpecies = petSpecies;
         this.petBreed = petBreed;
         this.petName = petName;
         this.petAge = petAge;
-        this.petSex = petSex;
+        this.petgender = petgender;
         this.petNeutralization = petNeutralization;
     }
 

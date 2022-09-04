@@ -20,4 +20,7 @@ public interface PetService {
     // 반려동물 info
     PetReq petInfo(Long petSerial);
 
+    // 반려동물 삭제
+    void petDelete(Long petSerial);
+
 }

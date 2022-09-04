@@ -66,6 +66,13 @@ public class PetController {
         }
     }
 
+    // 반려동물 삭제
+    @DeleteMapping("/pet/delete/{petSerial}")
+    public ResponseEntity<PetReq> petDelete(@PathVariable("petSerial") Long petSerial) {
+        petService.petDelete(petSerial);
+        return new ResponseEntity(DefaultRes.res(StatusCode.OK, ResponseMessage.SUCCESS_DELETE_PET), HttpStatus.OK);
+    }
+
     private String extractEmail(Authentication authentication){
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         String memberEmail = principal.getMember().getMemberEmail();
